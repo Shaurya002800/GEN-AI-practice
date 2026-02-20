@@ -119,7 +119,14 @@ If the user is engaging in discussion, try to steer them towards getting in touc
         messages = [{"role": "system", "content": self.system_prompt()}] + history + [{"role": "user", "content": message}]
         done = False
         while not done:
-            response = self.gemini.chat.completions.create(model="gemini-2.5-flash", messages=messages, tools=tools)
+            try:
+                response = self.gemini.chat.completions.create(
+                    model="gemini-2.5-flash",
+                    messages=messages,
+                    tools=tools
+                )
+            except Exception as e:
+                return "Sorry, I'm experiencing high traffic right now. Please try again later."
             if response.choices[0].finish_reason=="tool_calls":
                 message = response.choices[0].message
                 tool_calls = message.tool_calls
