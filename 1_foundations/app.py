@@ -80,7 +80,11 @@ class Me:
 
     def __init__(self):
         self.gemini = OpenAI(base_url=GEMINI_BASE_URL, api_key=google_api_key)
-        self.name = "Kunwar Shaurya Pratap Singh"
+        self.data = {
+            "name": "Kunwar Shaurya Pratap Singh",
+            "branch": "CSE (AI & Data Engineering)",
+            "college": "VIT Vellore"
+        }
         reader = PdfReader("me/autoCV__Copy_.pdf")
         self.linkedin = ""
         for page in reader.pages:
